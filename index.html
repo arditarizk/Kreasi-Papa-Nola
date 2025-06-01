@@ -673,10 +673,16 @@
           a.href = '#resep'; // Link to the #resep section
           a.textContent = i;
           a.addEventListener('click', function(e) {
-            e.preventDefault();
-            currentPage = i;
-            updatePaginationActiveState();
-            displayRecipes(currentPage);
+  e.preventDefault();
+  currentPage = i;
+  updatePaginationActiveState();
+  displayRecipes(currentPage);
+  
+  // Scroll ke #resep secara halus
+  const resepSection = document.getElementById('resep');
+  if (resepSection) {
+    resepSection.scrollIntoView({ behavior: 'smooth' });
+  }
           });
           li.appendChild(a);
           paginationControls.appendChild(li);

@@ -727,16 +727,17 @@
     setupPagination();
     displayRecipes(currentPage);
 
-    // ✅ Auto-scroll ke anchor setelah semua JS jalan
-    setTimeout(() => {
-      const hash = window.location.hash;
-      if (hash) {
-        const target = document.querySelector(hash);
-        if (target) {
+  window.addEventListener('load', function () {
+    const hash = window.location.hash;
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        // Scroll setelah delay agar elemen benar-benar tersedia
+        setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth' });
-        }
+        }, 300);
       }
-    }, 300); // kasih delay sedikit agar semua elemen muncul dulu
+    }
   });
 </script>
 </body>

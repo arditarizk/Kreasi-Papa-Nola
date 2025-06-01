@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resep Pentol Ayam Rumahan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Mengatur font global dan warna latar belakang */
+    body {
+      font-family: 'Inter', sans-serif; /* Menggunakan font Inter untuk tampilan modern */
+      background-color: #f8f9fa; /* Warna latar belakang yang lembut */
+      color: #343a40; /* Warna teks utama */
+      line-height: 1.6;
+    }
+
+    /* Styling untuk container utama */
+    .container {
+      max-width: 960px; /* Lebar maksimum container */
+      margin-top: 3rem; /* Margin atas */
+      margin-bottom: 3rem; /* Margin bawah */
+      padding-left: 15px; /* Padding kiri */
+      padding-right: 15px; /* Padding kanan */
+    }
+
+    /* Styling untuk navbar */
+    .navbar {
+      margin-bottom: 3rem; /* Memberikan jarak antara navbar dan konten */
+      border-radius: 0 0 15px 15px; /* Sudut membulat di bagian bawah navbar */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Bayangan lembut */
+      background-color: #ffffff !important; /* Latar belakang putih untuk navbar */
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #28a745 !important; /* Warna hijau untuk brand */
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-brand .icon {
+      font-size: 1.5rem;
+      margin-right: 8px;
+    }
+
+    .nav-link {
+      color: #343a40 !important; /* Warna teks link */
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #28a745 !important; /* Warna hijau saat hover */
+    }
+
+    /* Styling untuk judul utama */
+    h1 {
+      color: #28a745; /* Warna hijau untuk judul */
+      font-weight: 700; /* Tebal */
+      margin-bottom: 1.5rem;
+    }
+
+    /* Styling untuk ikon di judul dan card header */
+    .icon {
+      margin-right: 10px;
+      color: inherit; /* Mengambil warna dari parent */
+    }
+
+    /* Styling umum untuk card */
+    .card {
+      border: none; /* Menghilangkan border default Bootstrap */
+      border-radius: 15px; /* Sudut membulat */
+      overflow: hidden; /* Memastikan konten tidak melampaui sudut membulat */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Bayangan lembut */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi untuk efek hover */
+    }
+
+    .card:hover {
+      transform: translateY(-5px); /* Sedikit naik saat dihover */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Bayangan lebih kuat saat dihover */
+    }
+
+    /* Styling untuk header card */
+    .card-header {
+      border-bottom: none; /* Menghilangkan border bawah */
+      border-top-left-radius: 15px; /* Sudut membulat atas kiri */
+      border-top-right-radius: 15px; /* Sudut membulat atas kanan */
+      padding: 1.25rem 1.5rem; /* Padding lebih besar */
+      font-weight: 600; /* Tebal */
+      font-size: 1.2rem; /* Ukuran font lebih besar */
+      display: flex;
+      align-items: center;
+    }
+
+    /* Warna latar belakang untuk header card */
+    .card-header.bg-primary {
+      background-color: #007bff !important; /* Warna biru Bootstrap */
+    }
+
+    .card-header.bg-success {
+      background-color: #28a745 !important; /* Warna hijau Bootstrap */
+    }
+
+    /* Styling untuk list group item */
+    .list-group-item {
+      border-color: #e9ecef; /* Warna border yang lebih lembut */
+      padding: 0.75rem 1.5rem; /* Padding yang konsisten */
+      font-size: 1rem;
+    }
+
+    /* Styling untuk list group item bernomor */
+    .list-group-numbered .list-group-item {
+      padding-left: 2.5rem; /* Menyesuaikan padding untuk nomor */
+    }
+
+    /* Styling untuk footer */
+    footer {
+      color: #6c757d; /* Warna teks abu-abu */
+      font-size: 0.9rem;
+      margin-top: 3rem;
+      border-top: 1px solid #e9ecef; /* Garis pemisah di atas footer */
+      padding-top: 1.5rem;
+    }
+
+    /* Styling untuk kotak gambar resep */
+    .recipe-image-box {
+      position: relative; /* Diperlukan untuk overlay */
+      width: 100%;
+      max-width: 800px; /* Batasi lebar gambar */
+      margin: 0 auto 2rem auto; /* Pusatkan dan berikan margin bawah */
+      border-radius: 15px; /* Sudut membulat */
+      overflow: hidden; /* Memastikan gambar tidak melampaui sudut */
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Bayangan lebih kuat untuk gambar */
+    }
+
+    /* Styling untuk gambar di dalam kotak gambar */
+    .recipe-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
+      border-radius: 15px; /* Sudut membulat */
+      transition: transform 0.4s ease-in-out; /* Transisi untuk efek zoom */
+    }
+
+    /* Efek hover pada gambar */
+    .recipe-image-box:hover .recipe-image {
+      transform: scale(1.05); /* Memperbesar gambar saat dihover */
+    }
+
+    /* Styling untuk overlay gambar */
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4); /* Overlay gelap transparan */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0; /* Awalnya tidak terlihat */
+      transition: opacity 0.3s ease; /* Transisi untuk efek fade */
+      border-radius: 15px; /* Sudut membulat */
+    }
+
+    /* Efek hover pada overlay */
+    .recipe-image-box:hover .image-overlay {
+      opacity: 1; /* Muncul saat dihover */
+    }
+
+    /* Styling untuk teks di overlay */
+    .overlay-text {
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Bayangan teks untuk keterbacaan */
+      transform: translateY(20px); /* Awalnya sedikit ke bawah */
+      transition: transform 0.3s ease; /* Transisi untuk efek geser */
+    }
+
+    /* Efek hover pada teks overlay */
+    .recipe-image-box:hover .overlay-text {
+      transform: translateY(0); /* Kembali ke posisi semula saat dihover */
+    }
+
+    /* Media queries untuk responsivitas */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem; /* Ukuran font lebih kecil untuk mobile */
+      }
+
+      .card-header {
+        font-size: 1.1rem;
+        padding: 1rem;
+      }
+
+      .list-group-item {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+      }
+
+      .overlay-text {
+        font-size: 1.8rem; /* Ukuran font overlay lebih kecil untuk mobile */
+      }
+
+      .navbar {
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .recipe-image-box {
+        margin-bottom: 1.5rem;
+      }
+
+      .overlay-text {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-utensils icon"></i> ResepKu
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html" style="margin: 0 10px; color: #4fc3f7; text-decoration: none; font-weight: bold;">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#resep" style="margin: 0 10px; color: #4fc3f7; text-decoration: none; font-weight: bold;">Resep Lain</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#tentang" style="margin: 0 10px; color: #4fc3f7; text-decoration: none; font-weight: bold;">Tentang Kami</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://wa.me/62895410571547" target="_blank" style="margin: 0 10px; color: #4fc3f7; text-decoration: none; font-weight: bold;">Kontak</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="text-center mb-4"><i class="fas fa-utensils icon"></i>Resep Pentol Ayam Praktis & Lezat</h1>
+    <p class="text-center text-muted mb-5">Cocok untuk camilan rumahan, bekal anak, atau ide jualan!</p>
+
+    <div class="recipe-image-box mb-5">
+  <picture>
+    <source srcset="https://i.imgur.com/gBHQYkd.webp" type="image/webp">
+    <img src="https://imgur.com/gallery/homemade-chicken-meatballs-on-traditional-plate-9v6cJw9#gBHQYkd"
+         alt="Gambar Pentol Ayam Lezat"
+         class="recipe-image shadow-lg"
+         loading="lazy"
+         width="800"
+         height="450"
+         onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0F2F1/004D40?text=Gambar+Tidak+Tersedia';">
+  </picture>
+  <div class="image-overlay">
+    <span class="overlay-text">Siap Disantap!</span>
+  </div>
+</div>
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <i class="fas fa-list icon"></i> Bahan-bahan yang Dibutuhkan
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">500 gram dada ayam tanpa tulang</li>
+        <li class="list-group-item">100 gram es batu / air es</li>
+        <li class="list-group-item">5 siung bawang putih</li>
+        <li class="list-group-item">3 sendok makan bawang merah goreng</li>
+        <li class="list-group-item">1 sendok teh garam (kasar lebih baik)</li>
+        <li class="list-group-item">1/2 sendok teh baking powder</li>
+        <li class="list-group-item">1 sendok teh kaldu jamur</li>
+        <li class="list-group-item">1 butir telur</li>
+        <li class="list-group-item">1 sachet bumbu kuah bakso instan (merk MamaSuka)</li>
+        <li class="list-group-item">200 gram tepung tapioka</li>
+      </ul>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-header bg-success text-white">
+        <i class="fas fa-blender icon"></i> Langkah-langkah Membuat Pentol Ayam
+      </div>
+      <div class="card-body">
+        <ol class="list-group list-group-numbered">
+          <li class="list-group-item">Potong daging ayam menjadi kecil-kecil agar mudah digiling.</li>
+          <li class="list-group-item">Masukkan es batu, ayam, bawang putih, bawang merah goreng, bumbu kuah bakso, baking powder, garam, dan kaldu jamur ke dalam food processor atau chopper.</li>
+          <li class="list-group-item">Giling hingga halus dan tercampur rata.</li>
+          <li class="list-group-item">Tambahkan 1 butir telur, kemudian giling kembali hingga adonan lembut.</li>
+          <li class="list-group-item">Pindahkan adonan ke wadah, lalu uleni sambil tambahkan tepung tapioka sedikit demi sedikit hingga kalis dan bisa dibentuk.</li>
+          <li class="list-group-item">Panaskan air hingga mendidih, lalu matikan api. Bentuk adonan bulat-bulat menggunakan tangan atau sendok, kemudian masukkan ke dalam air panas.</li>
+          <li class="list-group-item">Setelah semua adonan tercetak, nyalakan kembali kompor dan rebus pentol hingga mengapung dan matang.</li>
+          <li class="list-group-item">Angkat dan segera masukkan ke dalam air dingin atau air bersuhu ruang untuk menghentikan proses masak.</li>
+          <li class="list-group-item">Tiriskan dan angin-anginkan hingga permukaan kering.</li>
+          <li class="list-group-item">Simpan dalam wadah tertutup di dalam freezer jika ingin disimpan lama.</li>
+        </ol>
+      </div>
+    </div>
+
+    <footer class="text-center mt-5 py-3">
+      <p><i class="fas fa-heart"></i> Dibuat dengan cinta di dapur rumahan | Resep by Papa Nola</p>
+    </footer>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

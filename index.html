@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kreasi Papa Nola</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Mengatur font global dan warna latar belakang */
+    body {
+      background-color: #f8f9fa; /* Warna latar belakang yang lembut */
+      font-family: 'Inter', sans-serif; /* Menggunakan font Inter untuk tampilan modern */
+      color: #343a40; /* Warna teks utama */
+      line-height: 1.6;
+    }
+
+    /* Styling untuk container utama */
+    .container {
+      max-width: 960px; /* Lebar maksimum container */
+      margin-top: 3rem; /* Margin atas */
+      margin-bottom: 3rem; /* Margin bawah */
+      padding-left: 15px; /* Padding kiri */
+      padding-right: 15px; /* Padding kanan */
+    }
+
+    /* Styling untuk navbar */
+    .navbar {
+      margin-bottom: 3rem; /* Memberikan jarak antara navbar dan konten */
+      border-radius: 15px; /* Sudut membulat untuk navbar */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Bayangan lembut */
+      background-color: #ffffff !important; /* Latar belakang putih untuk navbar */
+      padding: 1rem 1.5rem; /* Padding lebih besar */
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #28a745 !important; /* Warna hijau untuk brand */
+      display: flex;
+      align-items: center;
+      font-size: 1.3rem; /* Ukuran font brand */
+    }
+
+    .navbar-brand .fa-utensils {
+      font-size: 1.5rem;
+      margin-right: 8px;
+    }
+
+    .nav-link {
+      color: #343a40 !important; /* Warna teks link */
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 0.5rem 1rem; /* Padding link */
+      border-radius: 8px; /* Sudut membulat pada link */
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #ffffff !important; /* Warna putih saat hover/aktif */
+      background-color: #28a745; /* Latar belakang hijau saat hover/aktif */
+    }
+
+    /* Styling untuk bagian hero/jumbotron */
+    .hero {
+      background-color: #e6ffed; /* Latar belakang hijau muda */
+      padding: 60px 20px;
+      border-radius: 15px; /* Sudut membulat */
+      margin-top: 30px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Bayangan lebih menonjol */
+      color: #28a745; /* Warna teks judul hero */
+    }
+    .hero h1 {
+      font-weight: 700;
+      color: #28a745; /* Warna hijau untuk judul hero */
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: #495057; /* Warna teks paragraf hero */
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Styling untuk kotak gambar utama (Hook Image Box) */
+    .main-image-hook-box {
+        position: relative;
+        width: 100%;
+        max-width: 900px; /* Lebar lebih besar untuk hero image */
+        margin: 3rem auto 2rem auto; /* Atur margin */
+        border-radius: 15px; /* Sudut membulat */
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Bayangan lebih kuat */
+        cursor: pointer; /* Menunjukkan bisa diklik */
+        transition: transform 0.3s ease;
+    }
+
+    .main-image-hook-box:hover {
+        transform: translateY(-8px); /* Sedikit naik saat hover */
+    }
+
+    .main-image-hook-box img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 15px;
+        transition: transform 0.4s ease-in-out;
+    }
+
+    .main-image-hook-box:hover img {
+        transform: scale(1.03); /* Zoom sedikit saat hover */
+    }
+
+    .main-image-hook-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%); /* Gradient gelap dari bawah */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 2rem;
+        opacity: 1; /* Selalu terlihat */
+        transition: opacity 0.3s ease;
+    }
+
+    .main-image-hook-overlay h3 {
+        color: white;
+        font-weight: 700;
+        font-size: 2.2rem;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        margin-bottom: 0.5rem;
+    }
+
+    .main-image-hook-overlay p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        margin-bottom: 1.5rem;
+    }
+
+    .main-image-hook-overlay .btn {
+        background-color: #ffb6b9; /* Warna tombol yang kontras */
+        border-color: #ffb6b9;
+        color: white;
+        font-weight: 600;
+        padding: 0.8rem 1.8rem;
+        border-radius: 50px; /* Tombol kapsul */
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .main-image-hook-overlay .btn:hover {
+        background-color: #ff8c94;
+        transform: translateY(-2px);
+    }
+
+    /* Styling untuk judul bagian */
+    h2 {
+      color: #28a745; /* Warna hijau untuk judul bagian */
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    h2 .fas {
+      margin-right: 10px;
+    }
+
+    /* Styling untuk kartu resep */
+    .recipe-card {
+      border-radius: 15px; /* Sudut membulat */
+      border: none; /* Menghilangkan border default Bootstrap */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Bayangan lembut */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi untuk efek hover */
+      overflow: hidden; /* Memastikan konten tidak melampaui sudut membulat */
+    }
+    .recipe-card:hover {
+      transform: translateY(-5px); /* Sedikit naik saat dihover */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Bayangan lebih kuat saat dihover */
+    }
+    .recipe-card .card-body {
+      padding: 1.5rem; /* Padding lebih besar */
+    }
+    .recipe-card .card-title {
+      font-weight: 600;
+      color: #343a40; /* Warna judul kartu */
+      margin-bottom: 0.75rem;
+    }
+    .recipe-card .card-text {
+      color: #6c757d; /* Warna teks deskripsi kartu */
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+    .recipe-card .btn-outline-success { /* Mengubah warna tombol menjadi hijau */
+      color: #28a745;
+      border-color: #28a745;
+      transition: all 0.3s ease;
+    }
+    .recipe-card .btn-outline-success:hover {
+      background-color: #28a745;
+      color: #ffffff;
+    }
+
+    /* Styling untuk bagian tentang */
+    #tentang h2 {
+      margin-bottom: 1rem;
+    }
+    #tentang p {
+      color: #495057;
+      font-size: 1rem;
+    }
+
+    /* Styling untuk footer */
+    footer {
+      margin-top: 5rem; /* Margin atas lebih besar */
+      padding: 2.5rem 20px; /* Padding lebih besar */
+      background-color: #e9ecef; /* Latar belakang abu-abu muda */
+      color: #6c757d; /* Warna teks abu-abu */
+      text-align: center;
+      border-radius: 15px; /* Sudut membulat */
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05); /* Bayangan lembut ke atas */
+      font-size: 0.9rem;
+    }
+    footer .fas {
+      color: #dc3545; /* Warna hati merah */
+      margin-right: 5px;
+    }
+
+    /* Styling untuk search bar */
+    .search-bar-section {
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+    .search-bar-section .input-group .form-control {
+        border-radius: 50px; /* Bentuk kapsul */
+        padding: 0.75rem 1.5rem;
+        border-color: #ced4da;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .search-bar-section .input-group .btn {
+        border-radius: 50px !important; /* Bentuk kapsul */
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        margin-left: -1px; /* Gabungkan dengan input */
+        transition: background-color 0.3s ease;
+    }
+    .search-bar-section .input-group .btn:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    /* Styling untuk featured recipe */
+    .featured-recipe-card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 3rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .featured-recipe-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    .featured-recipe-card img {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        object-fit: cover;
+        height: 250px; /* Tinggi tetap untuk gambar */
+        width: 100%;
+    }
+    .featured-recipe-card .card-body {
+        padding: 2rem;
+    }
+    .featured-recipe-card .card-title {
+        color: #28a745;
+        font-weight: 700;
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+    }
+    .featured-recipe-card .card-text {
+        color: #555;
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Styling untuk kategori */
+    .category-card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        cursor: pointer;
+        height: 100%; /* Pastikan tinggi sama */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        background-color: #e6ffed; /* Latar belakang hijau muda saat hover */
+    }
+    .category-card .fas {
+        font-size: 2.5rem;
+        color: #28a745;
+        margin-bottom: 1rem;
+    }
+    .category-card h5 {
+        font-weight: 600;
+        color: #343a40;
+    }
+
+    /* Styling untuk pagination */
+    .pagination .page-item .page-link {
+        border-radius: 8px; /* Sudut membulat */
+        margin: 0 5px;
+        color: #28a745;
+        border-color: #28a745;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .pagination .page-item.active .page-link,
+    .pagination .page-item .page-link:hover {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+    }
+
+    /* Media queries untuk responsivitas */
+    @media (max-width: 768px) {
+      .navbar {
+        margin-bottom: 2rem;
+      }
+      .hero {
+        padding: 40px 15px;
+        margin-top: 20px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .main-image-hook-overlay h3 {
+          font-size: 1.8rem;
+      }
+      .main-image-hook-overlay p {
+          font-size: 0.9rem;
+      }
+      .main-image-hook-overlay .btn {
+          padding: 0.6rem 1.4rem;
+          font-size: 0.9rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      .recipe-card .card-body {
+        padding: 1rem;
+      }
+      .featured-recipe-card img {
+          height: 200px;
+      }
+      .featured-recipe-card .card-title {
+          font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .navbar {
+        border-radius: 10px;
+      }
+      .navbar-brand {
+        font-size: 1.2rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero p {
+        font-size: 0.9rem;
+      }
+      .main-image-hook-box {
+          margin-top: 2rem;
+      }
+      .main-image-hook-overlay h3 {
+          font-size: 1.5rem;
+      }
+      .main-image-hook-overlay p {
+          font-size: 0.8rem;
+          margin-bottom: 1rem;
+      }
+      .main-image-hook-overlay .btn {
+          padding: 0.5rem 1rem;
+          font-size: 0.8rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      footer {
+        margin-top: 3rem;
+        padding: 1.5rem 15px;
+        border-radius: 10px;
+      }
+      .search-bar-section .input-group .form-control,
+      .search-bar-section .input-group .btn {
+          padding: 0.6rem 1rem;
+          font-size: 0.9rem;
+      }
+      .category-card .fas {
+          font-size: 2rem;
+      }
+      .category-card h5 {
+          font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white mt-3 border rounded shadow-sm">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-utensils"></i> Kreasi Papa Nola
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Beranda</a></li>
+            <li class="nav-item"><a class="nav-link" href="#resep">Resep</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
+            <li class="nav-item">
+            <a class="nav-link" href="https://wa.me/62895410571547" target="_blank">Kontak</a>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero text-dark">
+      <h1 class="display-5">Kreasi Bekal Anak Simpel & Lezat</h1>
+      <p class="lead">Ide bekal dari Papa Nola untuk ibu-ibu muda yang ingin memberi gizi dan cinta lewat makanan.</p>
+    </div>
+
+    <div class="search-bar-section">
+        <div class="input-group">
+            <input type="text" id="recipeSearch" class="form-control" placeholder="Cari resep (misal: ayam, nugget, roti)..." aria-label="Cari resep">
+            <button class="btn" type="button" id="searchButton"><i class="fas fa-search"></i> Cari</button>
+        </div>
+    </div>
+
+    <section id="featured-recipe" class="mt-5">
+        <h2 class="mb-4"><i class="fas fa-star"></i> Resep Pilihan Hari Ini</h2>
+        <div class="card featured-recipe-card">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <picture>
+    <source srcset="https://i.imgur.com/dIkX5qL.webp" type="image/webp">
+    <img src="https://i.imgur.com/dIkX5qL.png"
+         alt="Gambar Tempe Mendol Ayam Lezat"
+         class="recipe-image shadow-lg"
+         loading="lazy"
+         width="800"
+         height="450"
+         onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0F2F1/004D40?text=Gambar+Tidak+Tersedia';">
+  </picture>
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">Tempe Mendol Ayam</h5>
+                        <p class="card-text">Tempe mendol sehat dengan campuran ayam, favorit si kecil!</p>
+                        <a href="resep mendol ayam.html" class="btn btn-outline-success"><i class="fas fa-eye"></i> Lihat Resep Lengkap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-image-hook-box">
+      <picture>
+    <source srcset="https://i.imgur.com/RoGwjkS.webp" type="image/webp">
+    <img src="https://imgur.com/gallery/cute-school-lunchbox-with-chicken-meatball-skewers-kids-qVgD9qR#RoGwjkS"
+         alt="Ide Bekal Anak Sehat"
+         class="recipe-image shadow-lg"
+         loading="lazy"
+         width="800"
+         height="450"
+         onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0F2F1/004D40?text=Gambar+Tidak+Tersedia';">
+  </picture>
+      <div class="main-image-hook-overlay">
+        <h3>Menu Bekal Anti Bosan!</h3>
+        <p>Lihat berbagai resep bekal praktis yang disukai anak-anak.</p>
+        <a href="#resep" class="btn">Lihat Semua Resep <i class="fas fa-arrow-right ms-2"></i></a>
+      </div>
+    </div>
+
+    <section id="resep" class="mt-5">
+      <h2 class="mb-4"><i class="fas fa-book-open"></i> Resep Populer</h2>
+      <div id="recipe-list" class="row">
+        <div class="col-md-4 mb-4 recipe-item" data-page="1" data-keywords="pentol ayam kenyal camilan sekolah gurih">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Pentol Ayam Kenyal</h5>
+              <p class="card-text">Lembut, gurih, dan cocok banget buat camilan anak sekolah.</p>
+              <a href="resep pentol ayam.html" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 recipe-item" data-page="1" data-keywords="nugget sayur homemade sehat anak brokoli">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Nugget Sayur Homemade</h5>
+              <p class="card-text">Sayur tersembunyi tapi tetap enak — cara cerdas agar anak suka makan sehat.</p>
+              <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 recipe-item" data-page="1" data-keywords="roti gulung keju sarapan bekal praktis creamy">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Roti Gulung Isi Keju</h5>
+              <p class="card-text">Roti gulung cepat buat sarapan atau bekal, praktis dan creamy!</p>
+              <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4 recipe-item" data-page="2" data-keywords="mendol ayam tempe goreng tradisional jawa">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Mendol Ayam Tempe Goreng</h5>
+              <p class="card-text">Camilan gurih khas Jawa Timur, cocok untuk lauk atau teman nasi.</p>
+              <a href="resep mendol ayam.html" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 recipe-item" data-page="2" data-keywords="bola-bola nasi sosis bekal mudah">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Bola-Bola Nasi Sosis</h5>
+              <p class="card-text">Resep bekal super praktis dan disukai anak-anak.</p>
+              <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 recipe-item" data-page="2" data-keywords="puding coklat vla vanilla dessert manis">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Puding Coklat Vla Vanilla</h5>
+              <p class="card-text">Dessert manis dan lembut, cocok untuk hidangan penutup.</p>
+              <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4 recipe-item" data-page="3" data-keywords="telur gabus keju renyah gurih camilan">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Telur Gabus Keju Renyah</h5>
+              <p class="card-text">Camilan renyah gurih dengan sentuhan keju, bikin nagih!</p>
+              <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 recipe-item" data-page="3" data-keywords="sandwich tuna mayo bekal sarapan praktis">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Sandwich Tuna Mayo Sehat</h5>
+              <p class="card-text">Bekal praktis dan bergizi, siap dalam hitungan menit.</p>
+              <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 recipe-item" data-page="3" data-keywords="sate lilit ayam bali resep nusantara">
+          <div class="card recipe-card">
+            <div class="card-body">
+              <h5 class="card-title">Sate Lilit Ayam Khas Bali</h5>
+              <p class="card-text">Aroma rempah khas Bali, cocok untuk hidangan istimewa keluarga.</p>
+              <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> Lihat Resep</a>
+            </div>
+          </div>
+        </div>
+        </div>
+
+      <nav aria-label="Halaman Resep">
+        <ul class="pagination justify-content-center mt-4" id="pagination-controls">
+          </ul>
+      </nav>
+    </section>
+
+    <section id="tentang" class="mt-5">
+      <h2 class="mb-3"><i class="fas fa-user"></i> Tentang Papa Nola</h2>
+      <p>Saya Papa Nola, ayah dari anak-anak aktif yang doyan ngemil dan suka bekal lucu. Lewat resep-resep ini, saya ingin membantu ibu-ibu muda menyiapkan makanan yang praktis, sehat, dan disukai anak-anak. Semua resep sudah dicoba di rumah!</p>
+    </section>
+
+    <footer>
+      <p><i class="fas fa-heart"></i> Dibuat dengan cinta oleh Papa Nola | © 2025</p>
+    </footer>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const recipesPerPage = 3; // Jumlah resep per halaman
+      const recipeItems = document.querySelectorAll('.recipe-item');
+      const paginationControls = document.getElementById('pagination-controls');
+      const searchInput = document.getElementById('recipeSearch');
+      const searchButton = document.getElementById('searchButton');
+
+      let currentPage = 1;
+
+      // Function to display recipes for a given page
+      function displayRecipes(page) {
+        // First, hide all recipe items
+        recipeItems.forEach(item => {
+          item.style.display = 'none';
+        });
+
+        // Filter items that are currently visible (not hidden by search)
+        const currentlyVisibleRecipes = Array.from(recipeItems).filter(item => {
+            // If search is active, use data-filtered. Otherwise, consider all as potentially visible.
+            if (searchInput.value.trim() !== '') {
+                return item.dataset.filtered === 'true';
+            }
+            return true; // If no search, all are potentially visible
+        });
+
+        const startIndex = (page - 1) * recipesPerPage;
+        const endIndex = startIndex + recipesPerPage;
+
+        // Show only the recipes for the current page from the filtered/all list
+        for (let i = startIndex; i < endIndex && i < currentlyVisibleRecipes.length; i++) {
+            currentlyVisibleRecipes[i].style.display = 'block';
+        }
+      }
+
+      // Function to generate pagination links
+      function setupPagination() {
+        paginationControls.innerHTML = ''; // Clear existing pagination
+
+        const filteredItems = Array.from(recipeItems).filter(item => {
+            if (searchInput.value.trim() !== '') {
+                return item.dataset.filtered === 'true';
+            }
+            return true;
+        });
+
+        const totalPages = Math.ceil(filteredItems.length / recipesPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const li = document.createElement('li');
+          li.classList.add('page-item');
+          if (i === currentPage) {
+            li.classList.add('active');
+          }
+          const a = document.createElement('a');
+          a.classList.add('page-link');
+          a.href = '#resep'; // Link to the #resep section
+          a.textContent = i;
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentPage = i;
+            updatePaginationActiveState();
+            displayRecipes(currentPage);
+          });
+          li.appendChild(a);
+          paginationControls.appendChild(li);
+        }
+
+        // Hide pagination if only one page
+        if (totalPages <= 1) {
+            paginationControls.style.display = 'none';
+        } else {
+            paginationControls.style.display = 'flex';
+        }
+      }
+
+      // Function to update active state of pagination links
+      function updatePaginationActiveState() {
+        document.querySelectorAll('.page-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        // Select the correct page item based on currentPage
+        const pageLinkToActivate = paginationControls.querySelector(`.page-link[data-page="${currentPage}"]`);
+        if (pageLinkToActivate) {
+            pageLinkToActivate.closest('.page-item').classList.add('active');
+        } else {
+            // Fallback if the specific data-page attribute is not found (e.g., after filter)
+            // This happens because we don't set data-page on the generated links, only textContent
+            // We need to re-select based on textContent or ensure data-page is set.
+            // For simplicity, let's just re-run setupPagination which will set active correctly.
+            setupPagination();
+        }
+      }
+
+      // Function to filter recipes based on search input
+      function filterRecipes() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let anyMatchFound = false;
+
+        recipeItems.forEach(item => {
+          const title = item.querySelector('.card-title').textContent.toLowerCase();
+          const text = item.querySelector('.card-text').textContent.toLowerCase();
+          const keywords = item.dataset.keywords ? item.dataset.keywords.toLowerCase() : '';
+
+          if (searchTerm === '' || title.includes(searchTerm) || text.includes(searchTerm) || keywords.includes(searchTerm)) {
+            item.dataset.filtered = 'true'; // Mark as visible after filter
+            anyMatchFound = true;
+          } else {
+            item.dataset.filtered = 'false'; // Mark as hidden
+          }
+        });
+
+        currentPage = 1; // Reset to first page after search
+        setupPagination(); // Re-setup pagination for filtered results
+        displayRecipes(currentPage); // Display first page of filtered results
+
+        // If no recipes match the search, display a message
+        const noResultsMessage = document.getElementById('no-results-message');
+        if (!anyMatchFound && searchTerm !== '') {
+            if (!noResultsMessage) {
+                const messageDiv = document.createElement('div');
+                messageDiv.id = 'no-results-message';
+                messageDiv.classList.add('alert', 'alert-warning', 'text-center', 'mt-4');
+                messageDiv.textContent = 'Maaf, tidak ada resep yang cocok dengan pencarian Anda.';
+                document.getElementById('resep').appendChild(messageDiv);
+            }
+        } else {
+            if (noResultsMessage) {
+                noResultsMessage.remove();
+            }
+        }
+      }
+
+      // Event listeners for search
+      searchInput.addEventListener('keyup', filterRecipes);
+      searchButton.addEventListener('click', filterRecipes);
+
+      // Initial setup
+      setupPagination(); // Setup pagination for all recipes initially
+      displayRecipes(currentPage); // Display the first page
+    });
+  </script>
+</body>
+</html>
+

@@ -493,7 +493,7 @@
     <div class="main-image-hook-box">
       <picture>
     <source srcset="https://i.imgur.com/RoGwjkS.webp" type="image/webp">
-    <img src="https://imgur.com/gallery/cute-school-lunchbox-with-chicken-meatball-skewers-kids-qVgD9qR#RoGwjkS"
+    <img src="https://i.imgur.com/RoGwjkS.png"
          alt="Ide Bekal Anak Sehat"
          class="recipe-image shadow-lg"
          loading="lazy"
@@ -737,6 +737,32 @@
           target.scrollIntoView({ behavior: 'smooth' });
         }, 300); // Delay agar layout benar-benar siap
       }
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+    if ('IntersectionObserver' in window) {
+      let observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            let img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            observer.unobserve(img);
+          }
+        });
+      });
+      lazyImages.forEach(function (img) {
+        observer.observe(img);
+      });
+    } else {
+      // Fallback jika browser lama
+      lazyImages.forEach(function (img) {
+        img.src = img.dataset.src;
+        img.classList.remove('lazy');
+      });
     }
   });
 </script>

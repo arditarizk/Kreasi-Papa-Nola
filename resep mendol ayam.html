@@ -259,13 +259,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html#">Home</a>
+            <a class="nav-link active" aria-current="page" href="/#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html#resep">Resep Lain</a>
+            <a class="nav-link" href="/#resep">Resep Lain</a>            
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html#tentang">Tentang Kami</a>
+            <a class="nav-link" href="/#tentang">Tentang Kami</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://wa.me/62895410571547" target="_blank" >Kontak</a>
@@ -282,7 +282,7 @@
     <div class="recipe-image-box mb-5">
   <picture>
     <source srcset="https://i.imgur.com/dIkX5qL.webp" type="image/webp">
-    <img src="https://imgur.com/gallery/traditional-indonesian-tempeh-chicken-fritters-mendol-ayam-on-serving-plate-nlwlVfh#dIkX5qL"
+    <img src="https://i.imgur.com/dIkX5qL.png"
          alt="Gambar Tempe Mendol Ayam Lezat"
          class="recipe-image shadow-lg"
          loading="lazy"
@@ -349,6 +349,32 @@
 
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+    if ('IntersectionObserver' in window) {
+      let observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            let img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            observer.unobserve(img);
+          }
+        });
+      });
+      lazyImages.forEach(function (img) {
+        observer.observe(img);
+      });
+    } else {
+      // Fallback jika browser lama
+      lazyImages.forEach(function (img) {
+        img.src = img.dataset.src;
+        img.classList.remove('lazy');
+      });
+    }
+  });
+</script>
 </body>
 </html>
 

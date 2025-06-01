@@ -726,16 +726,16 @@
 
     setupPagination();
     displayRecipes(currentPage);
+  });
 
+  // ⬇️ DITARUH DI LUAR DOMContentLoaded AGAR DIEKSEKUSI SAAT SELURUH HALAMAN SELESAI DIMUAT
   window.addEventListener('load', function () {
-    const hash = window.location.hash;
-    if (hash) {
-      const target = document.querySelector(hash);
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
       if (target) {
-        // Scroll setelah delay agar elemen benar-benar tersedia
         setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
+        }, 300); // Delay agar layout benar-benar siap
       }
     }
   });

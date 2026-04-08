@@ -1,355 +1,418 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resep Pentol Ayam Rumahan</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resep Pentol Ayam | Kreasi Papa Nola</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Vue.js & SweetAlert2 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <style>
-    /* Mengatur font global dan warna latar belakang */
-    body {
-      font-family: 'Inter', sans-serif; /* Menggunakan font Inter untuk tampilan modern */
-      background-color: #f8f9fa; /* Warna latar belakang yang lembut */
-      color: #343a40; /* Warna teks utama */
-      line-height: 1.6;
-    }
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#16a34a',
+                        soft: '#f0fdf4',
+                        accent: '#f97316',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 
-    /* Styling untuk container utama */
-    .container {
-      max-width: 960px; /* Lebar maksimum container */
-      margin-top: 3rem; /* Margin atas */
-      margin-bottom: 3rem; /* Margin bawah */
-      padding-left: 15px; /* Padding kiri */
-      padding-right: 15px; /* Padding kanan */
-    }
-
-    /* Styling untuk navbar */
-    .navbar {
-      margin-bottom: 3rem; /* Memberikan jarak antara navbar dan konten */
-      border-radius: 0 0 15px 15px; /* Sudut membulat di bagian bawah navbar */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Bayangan lembut */
-      background-color: #ffffff !important; /* Latar belakang putih untuk navbar */
-    }
-
-    .navbar-brand {
-      font-weight: 700;
-      color: #28a745 !important; /* Warna hijau untuk brand */
-      display: flex;
-      align-items: center;
-    }
-
-    .navbar-brand .icon {
-      font-size: 1.5rem;
-      margin-right: 8px;
-    }
-
-    .nav-link {
-      color: #343a40 !important; /* Warna teks link */
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .nav-link:hover {
-      color: #28a745 !important; /* Warna hijau saat hover */
-    }
-
-    /* Styling untuk judul utama */
-    h1 {
-      color: #28a745; /* Warna hijau untuk judul */
-      font-weight: 700; /* Tebal */
-      margin-bottom: 1.5rem;
-    }
-
-    /* Styling untuk ikon di judul dan card header */
-    .icon {
-      margin-right: 10px;
-      color: inherit; /* Mengambil warna dari parent */
-    }
-
-    /* Styling umum untuk card */
-    .card {
-      border: none; /* Menghilangkan border default Bootstrap */
-      border-radius: 15px; /* Sudut membulat */
-      overflow: hidden; /* Memastikan konten tidak melampaui sudut membulat */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Bayangan lembut */
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi untuk efek hover */
-    }
-
-    .card:hover {
-      transform: translateY(-5px); /* Sedikit naik saat dihover */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Bayangan lebih kuat saat dihover */
-    }
-
-    /* Styling untuk header card */
-    .card-header {
-      border-bottom: none; /* Menghilangkan border bawah */
-      border-top-left-radius: 15px; /* Sudut membulat atas kiri */
-      border-top-right-radius: 15px; /* Sudut membulat atas kanan */
-      padding: 1.25rem 1.5rem; /* Padding lebih besar */
-      font-weight: 600; /* Tebal */
-      font-size: 1.2rem; /* Ukuran font lebih besar */
-      display: flex;
-      align-items: center;
-    }
-
-    /* Warna latar belakang untuk header card */
-    .card-header.bg-primary {
-      background-color: #007bff !important; /* Warna biru Bootstrap */
-    }
-
-    .card-header.bg-success {
-      background-color: #28a745 !important; /* Warna hijau Bootstrap */
-    }
-
-    /* Styling untuk list group item */
-    .list-group-item {
-      border-color: #e9ecef; /* Warna border yang lebih lembut */
-      padding: 0.75rem 1.5rem; /* Padding yang konsisten */
-      font-size: 1rem;
-    }
-
-    /* Styling untuk list group item bernomor */
-    .list-group-numbered .list-group-item {
-      padding-left: 2.5rem; /* Menyesuaikan padding untuk nomor */
-    }
-
-    /* Styling untuk footer */
-    footer {
-      color: #6c757d; /* Warna teks abu-abu */
-      font-size: 0.9rem;
-      margin-top: 3rem;
-      border-top: 1px solid #e9ecef; /* Garis pemisah di atas footer */
-      padding-top: 1.5rem;
-    }
-
-    /* Styling untuk kotak gambar resep */
-    .recipe-image-box {
-      position: relative; /* Diperlukan untuk overlay */
-      width: 100%;
-      max-width: 800px; /* Batasi lebar gambar */
-      margin: 0 auto 2rem auto; /* Pusatkan dan berikan margin bawah */
-      border-radius: 15px; /* Sudut membulat */
-      overflow: hidden; /* Memastikan gambar tidak melampaui sudut */
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Bayangan lebih kuat untuk gambar */
-    }
-
-    /* Styling untuk gambar di dalam kotak gambar */
-    .recipe-image {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
-      border-radius: 15px; /* Sudut membulat */
-      transition: transform 0.4s ease-in-out; /* Transisi untuk efek zoom */
-    }
-
-    /* Efek hover pada gambar */
-    .recipe-image-box:hover .recipe-image {
-      transform: scale(1.05); /* Memperbesar gambar saat dihover */
-    }
-
-    /* Styling untuk overlay gambar */
-    .image-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4); /* Overlay gelap transparan */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0; /* Awalnya tidak terlihat */
-      transition: opacity 0.3s ease; /* Transisi untuk efek fade */
-      border-radius: 15px; /* Sudut membulat */
-    }
-
-    /* Efek hover pada overlay */
-    .recipe-image-box:hover .image-overlay {
-      opacity: 1; /* Muncul saat dihover */
-    }
-
-    /* Styling untuk teks di overlay */
-    .overlay-text {
-      color: white;
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Bayangan teks untuk keterbacaan */
-      transform: translateY(20px); /* Awalnya sedikit ke bawah */
-      transition: transform 0.3s ease; /* Transisi untuk efek geser */
-    }
-
-    /* Efek hover pada teks overlay */
-    .recipe-image-box:hover .overlay-text {
-      transform: translateY(0); /* Kembali ke posisi semula saat dihover */
-    }
-
-    /* Media queries untuk responsivitas */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem; /* Ukuran font lebih kecil untuk mobile */
-      }
-
-      .card-header {
-        font-size: 1.1rem;
-        padding: 1rem;
-      }
-
-      .list-group-item {
-        font-size: 0.95rem;
-        padding: 0.6rem 1rem;
-      }
-
-      .overlay-text {
-        font-size: 1.8rem; /* Ukuran font overlay lebih kecil untuk mobile */
-      }
-
-      .navbar {
-        margin-bottom: 2rem;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .container {
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .recipe-image-box {
-        margin-bottom: 1.5rem;
-      }
-
-      .overlay-text {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
+    <style>
+        [v-cloak] { display: none; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .step-gradient {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        }
+        .checkbox-custom:checked + label {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+        .fade-slide-enter-active, .fade-slide-leave-active {
+            transition: all 0.3s ease;
+        }
+        .fade-slide-enter-from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .fade-slide-leave-to {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    </style>
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <i class="fas fa-utensils icon"></i> ResepKu
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/#resep">Resep Lain</a>            
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/#tentang">Tentang Kami</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://wa.me/62895410571547" target="_blank" >Kontak</a>
-          </li>
-        </ul>
-      </div>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased">
+
+    <div id="app" v-cloak>
+        <!-- Navbar -->
+        <nav class="sticky top-0 z-50 glass-nav border-b border-slate-200">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                <div class="flex justify-between h-16 items-center">
+                    <div class="flex items-center gap-2 group cursor-pointer" @click="resetView">
+                        <div class="w-10 h-10 bg-brand text-white rounded-xl flex items-center justify-center shadow-lg shadow-green-100 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight">Resep<span class="text-brand">Ku</span></span>
+                    </div>
+                    
+                    <div class="hidden md:flex space-x-8 text-sm font-semibold">
+                        <a href="#" class="hover:text-brand transition">Beranda</a>
+                        <a href="#bahan" class="hover:text-brand transition">Bahan</a>
+                        <a href="#langkah" class="hover:text-brand transition">Langkah</a>
+                        <a href="https://wa.me/62895410571547" target="_blank" class="text-brand">Kontak</a>
+                    </div>
+
+                    <button @click="copyLink" class="bg-slate-100 p-2.5 rounded-full hover:bg-brand hover:text-white transition shadow-sm">
+                        <i class="fas fa-share-nodes"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-4xl mx-auto px-4 py-10">
+            <!-- Header Section -->
+            <header class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-brand text-xs font-bold uppercase tracking-widest mb-4">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    Resep Terpopuler
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
+                    Pentol Ayam <span class="text-brand">Praktis & Lezat</span>
+                </h1>
+                <p class="text-slate-500 text-lg max-w-2xl mx-auto">
+                    Rahasia membuat pentol ayam rumahan yang kenyal, gurih, dan anti gagal. Favorit si kecil untuk bekal sekolah!
+                </p>
+            </header>
+
+            <!-- Hero Image Card -->
+            <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl mb-16 group">
+                <img src="https://i.imgur.com/gBHQYkd.png" alt="Pentol Ayam" class="w-full h-[300px] md:h-[500px] object-cover transition-transform duration-1000 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-8 md:p-12">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-white">
+                            <div class="text-xs font-medium opacity-80 uppercase mb-1">Waktu Masak</div>
+                            <div class="font-bold flex items-center gap-2"><i class="far fa-clock text-brand"></i> 45 Menit</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-white">
+                            <div class="text-xs font-medium opacity-80 uppercase mb-1">Kesulitan</div>
+                            <div class="font-bold flex items-center gap-2"><i class="fas fa-signal text-brand"></i> Mudah</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-white">
+                            <div class="text-xs font-medium opacity-80 uppercase mb-1">Hasil</div>
+                            <div class="font-bold flex items-center gap-2"><i class="fas fa-bowl-food text-brand"></i> ±50 Butir</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-white">
+                            <div class="text-xs font-medium opacity-80 uppercase mb-1">Kategori</div>
+                            <div class="font-bold flex items-center gap-2"><i class="fas fa-tag text-brand"></i> Camilan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Ingredients Side -->
+                <aside id="bahan" class="lg:col-span-5">
+                    <div class="sticky top-24">
+                        <div class="flex items-center justify-between mb-8">
+                            <h2 class="text-2xl font-black flex items-center gap-3">
+                                <span class="w-10 h-10 bg-brand text-white rounded-xl flex items-center justify-center shadow-lg"><i class="fas fa-list-check"></i></span>
+                                Bahan-Bahan
+                            </h2>
+                            <button @click="resetIngredients" class="text-xs font-bold text-slate-400 hover:text-brand transition">
+                                <i class="fas fa-rotate-left mr-1"></i> Reset
+                            </button>
+                        </div>
+                        
+                        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                            <div class="space-y-4">
+                                <div v-for="(item, index) in ingredients" :key="index" class="flex items-start gap-4 group">
+                                    <input 
+                                        type="checkbox" 
+                                        :id="'ing-' + index" 
+                                        v-model="item.checked"
+                                        class="checkbox-custom mt-1 w-5 h-5 rounded border-slate-300 text-brand focus:ring-brand cursor-pointer"
+                                    >
+                                    <label :for="'ing-' + index" class="text-slate-700 font-medium leading-relaxed cursor-pointer select-none group-hover:text-brand transition-colors">
+                                        {{ item.text }}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 pt-8 border-t border-slate-50">
+                                <div class="bg-soft p-4 rounded-2xl flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm text-brand font-bold">
+                                        {{ progressPercentage }}%
+                                    </div>
+                                    <div class="flex-grow">
+                                        <div class="text-xs font-bold text-slate-400 uppercase mb-1">Persiapan Bahan</div>
+                                        <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                                            <div class="h-full bg-brand transition-all duration-500" :style="{ width: progressPercentage + '%' }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button @click="startCooking" class="w-full mt-8 bg-slate-900 text-white py-4 rounded-2xl font-extrabold flex items-center justify-center gap-3 hover:bg-slate-800 transition transform hover:-translate-y-1 shadow-xl">
+                            <i class="fas fa-play text-xs text-brand"></i>
+                            MULAI MEMASAK
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- Steps Side -->
+                <section id="langkah" class="lg:col-span-7">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-2xl font-black flex items-center gap-3">
+                            <span class="w-10 h-10 bg-brand text-white rounded-xl flex items-center justify-center shadow-lg"><i class="fas fa-fire-burner"></i></span>
+                            Langkah Kerja
+                        </h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div v-for="(step, index) in steps" :key="index" 
+                            @click="activeStep = index"
+                            class="group relative bg-white rounded-3xl p-6 md:p-8 border-2 transition-all duration-300 cursor-pointer overflow-hidden"
+                            :class="activeStep === index ? 'border-brand shadow-2xl shadow-green-50/50 scale-[1.02]' : 'border-transparent hover:border-slate-200 shadow-sm'"
+                        >
+                            <div class="flex gap-6">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center font-black text-xl transition-colors"
+                                    :class="activeStep === index ? 'bg-brand text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-brand/10 group-hover:text-brand'"
+                                >
+                                    {{ index + 1 }}
+                                </div>
+                                <div>
+                                    <p class="text-slate-700 font-medium leading-relaxed">
+                                        {{ step }}
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Active Indicator Bar -->
+                            <div v-if="activeStep === index" class="absolute bottom-0 left-0 h-1.5 bg-brand w-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- Pro Tip Section -->
+                    <div class="mt-12 bg-brand/5 border-2 border-dashed border-brand/20 rounded-[2rem] p-8 relative overflow-hidden">
+                        <i class="fas fa-lightbulb absolute -right-4 -top-4 text-brand/10 text-8xl rotate-12"></i>
+                        <h3 class="text-xl font-extrabold text-brand mb-4 flex items-center gap-2">
+                            <i class="fas fa-wand-magic-sparkles"></i> Tips Rahasia Papa Nola:
+                        </h3>
+                        <ul class="space-y-3 text-slate-600 font-medium relative z-10">
+                            <li class="flex items-start gap-3 italic">
+                                <i class="fas fa-circle-check text-brand mt-1.5 text-xs"></i>
+                                "Pastikan es batu benar-benar hancur agar suhu adonan tetap dingin, inilah kunci kekenyalan pentol."
+                            </li>
+                            <li class="flex items-start gap-3 italic">
+                                <i class="fas fa-circle-check text-brand mt-1.5 text-xs"></i>
+                                "Saat membentuk pentol, olesi tangan dengan sedikit minyak agar adonan tidak lengket dan hasilnya mulus."
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-slate-200 py-16 mt-20">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <div class="flex justify-center gap-6 mb-8">
+                    <a href="#" class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-brand hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-brand hover:text-white transition"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-brand hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p class="text-slate-500 font-bold mb-2">Dibuat dengan <i class="fas fa-heart text-red-500 animate-pulse"></i> di Dapur Rumahan</p>
+                <p class="text-slate-400 text-sm uppercase tracking-widest font-bold">Resep by Papa Nola &copy; 2025</p>
+            </div>
+        </footer>
+
+        <!-- Progress Toast (Mobile) -->
+        <div v-if="ingredientsCheckedCount > 0" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-4 border border-white/20 md:hidden">
+            <div class="text-xs font-bold whitespace-nowrap">Bahan Siap: {{ ingredientsCheckedCount }}/{{ ingredients.length }}</div>
+            <div class="w-20 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                <div class="h-full bg-brand transition-all duration-500" :style="{ width: progressPercentage + '%' }"></div>
+            </div>
+        </div>
+
+        <!-- Cooking Overlay (Simulation) -->
+        <transition name="fade-slide">
+            <div v-if="isCookingMode" class="fixed inset-0 z-[60] bg-slate-900/95 backdrop-blur-sm flex items-center justify-center p-4">
+                <div class="bg-white w-full max-w-2xl rounded-[3rem] p-8 md:p-12 shadow-2xl relative">
+                    <button @click="isCookingMode = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    
+                    <div class="text-center mb-10">
+                        <span class="text-brand font-black text-sm tracking-[0.3em] uppercase">Langkah {{ activeStep + 1 }} dari {{ steps.length }}</span>
+                        <div class="h-1 bg-slate-100 mt-4 rounded-full overflow-hidden">
+                            <div class="h-full bg-brand transition-all duration-500" :style="{ width: ((activeStep + 1) / steps.length * 100) + '%' }"></div>
+                        </div>
+                    </div>
+
+                    <div class="min-h-[150px] flex items-center justify-center text-center">
+                        <h3 class="text-2xl md:text-3xl font-bold text-slate-800 leading-relaxed">
+                            {{ steps[activeStep] }}
+                        </h3>
+                    </div>
+
+                    <div class="mt-12 flex justify-between gap-4">
+                        <button 
+                            @click="activeStep > 0 ? activeStep-- : null"
+                            :disabled="activeStep === 0"
+                            class="flex-1 py-4 rounded-2xl border-2 border-slate-200 font-bold text-slate-400 hover:border-brand hover:text-brand disabled:opacity-30 disabled:hover:border-slate-200 transition"
+                        >
+                            SEBELUMNYA
+                        </button>
+                        <button 
+                            @click="nextStep"
+                            class="flex-[2] py-4 rounded-2xl bg-brand text-white font-extrabold shadow-lg shadow-green-200 hover:brightness-110 transition"
+                        >
+                            {{ activeStep === steps.length - 1 ? 'SELESAI!' : 'LANJUT' }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
-  </nav>
 
-  <div class="container">
-    <h1 class="text-center mb-4"><i class="fas fa-utensils icon"></i>Resep Pentol Ayam Praktis & Lezat</h1>
-    <p class="text-center text-muted mb-5">Cocok untuk camilan rumahan, bekal anak, atau ide jualan!</p>
+    <script>
+        const { createApp, ref, computed } = Vue;
 
-    <div class="recipe-image-box mb-5">
-  <picture>
-    <source srcset="https://i.imgur.com/gBHQYkd.webp" type="image/webp">
-    <img src="https://i.imgur.com/gBHQYkd.png"
-         alt="Gambar Pentol Ayam Lezat"
-         class="recipe-image shadow-lg"
-         loading="lazy"
-         width="800"
-         height="450"
-         onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0F2F1/004D40?text=Gambar+Tidak+Tersedia';">
-  </picture>
-  <div class="image-overlay">
-    <span class="overlay-text">Siap Disantap!</span>
-  </div>
-</div>
+        createApp({
+            setup() {
+                const activeStep = ref(0);
+                const isCookingMode = ref(false);
+                
+                const ingredients = ref([
+                    { text: "500 gram dada ayam tanpa tulang (potong kecil)", checked: false },
+                    { text: "100 gram es batu / air es (sangat penting!)", checked: false },
+                    { text: "5 siung bawang putih (haluskan)", checked: false },
+                    { text: "3 sdm bawang merah goreng", checked: false },
+                    { text: "1 sdt garam (kasar lebih baik)", checked: false },
+                    { text: "1/2 sdt baking powder", checked: false },
+                    { text: "1 sdt kaldu jamur", checked: false },
+                    { text: "1 butir telur ayam fresh", checked: false },
+                    { text: "1 sachet bumbu kuah bakso instan", checked: false },
+                    { text: "200 gram tepung tapioka berkualitas", checked: false }
+                ]);
 
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header bg-primary text-white">
-        <i class="fas fa-list icon"></i> Bahan-bahan yang Dibutuhkan
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">500 gram dada ayam tanpa tulang</li>
-        <li class="list-group-item">100 gram es batu / air es</li>
-        <li class="list-group-item">5 siung bawang putih</li>
-        <li class="list-group-item">3 sendok makan bawang merah goreng</li>
-        <li class="list-group-item">1 sendok teh garam (kasar lebih baik)</li>
-        <li class="list-group-item">1/2 sendok teh baking powder</li>
-        <li class="list-group-item">1 sendok teh kaldu jamur</li>
-        <li class="list-group-item">1 butir telur</li>
-        <li class="list-group-item">1 sachet bumbu kuah bakso instan (merk MamaSuka)</li>
-        <li class="list-group-item">200 gram tepung tapioka</li>
-      </ul>
-    </div>
+                const steps = ref([
+                    "Siapkan daging ayam yang sudah dipotong kecil agar chopper tidak bekerja terlalu berat.",
+                    "Proses ayam bersama es batu, bawang-bawangan, dan semua bumbu kering (garam, kaldu, baking powder) hingga tekstur menjadi pasta halus.",
+                    "Masukkan telur ke dalam chopper, giling sebentar hingga menyatu dan adonan terlihat mengkilap/lembut.",
+                    "Pindahkan ke wadah besar, masukkan tepung tapioka secara bertahap sambil diuleni ringan hingga rata.",
+                    "Didihkan air di panci besar, lalu matikan api. Ini penting agar permukaan pentol mulus.",
+                    "Bentuk bulat adonan (kepal di tangan, tekan hingga keluar di antara jempol dan telunjuk) lalu masukkan ke air panas.",
+                    "Nyalakan kembali api sedang, rebus pentol hingga semuanya mengapung (tanda sudah matang).",
+                    "Angkat dan rendam sebentar di air dingin biasa agar proses memasak berhenti dan tekstur set.",
+                    "Tiriskan pentol dan biarkan mengering di suhu ruang sebelum disimpan atau disajikan.",
+                    "Pentol siap dinikmati atau simpan di freezer untuk stok bekal anak!"
+                ]);
 
-    <div class="card shadow-sm">
-      <div class="card-header bg-success text-white">
-        <i class="fas fa-blender icon"></i> Langkah-langkah Membuat Pentol Ayam
-      </div>
-      <div class="card-body">
-        <ol class="list-group list-group-numbered">
-          <li class="list-group-item">Potong daging ayam menjadi kecil-kecil agar mudah digiling.</li>
-          <li class="list-group-item">Masukkan es batu, ayam, bawang putih, bawang merah goreng, bumbu kuah bakso, baking powder, garam, dan kaldu jamur ke dalam food processor atau chopper.</li>
-          <li class="list-group-item">Giling hingga halus dan tercampur rata.</li>
-          <li class="list-group-item">Tambahkan 1 butir telur, kemudian giling kembali hingga adonan lembut.</li>
-          <li class="list-group-item">Pindahkan adonan ke wadah, lalu uleni sambil tambahkan tepung tapioka sedikit demi sedikit hingga kalis dan bisa dibentuk.</li>
-          <li class="list-group-item">Panaskan air hingga mendidih, lalu matikan api. Bentuk adonan bulat-bulat menggunakan tangan atau sendok, kemudian masukkan ke dalam air panas.</li>
-          <li class="list-group-item">Setelah semua adonan tercetak, nyalakan kembali kompor dan rebus pentol hingga mengapung dan matang.</li>
-          <li class="list-group-item">Angkat dan segera masukkan ke dalam air dingin atau air bersuhu ruang untuk menghentikan proses masak.</li>
-          <li class="list-group-item">Tiriskan dan angin-anginkan hingga permukaan kering.</li>
-          <li class="list-group-item">Simpan dalam wadah tertutup di dalam freezer jika ingin disimpan lama.</li>
-        </ol>
-      </div>
-    </div>
+                const progressPercentage = computed(() => {
+                    const checked = ingredients.value.filter(i => i.checked).length;
+                    return Math.round((checked / ingredients.value.length) * 100);
+                });
 
-    <footer class="text-center mt-5 py-3">
-      <p><i class="fas fa-heart"></i> Dibuat dengan cinta di dapur rumahan | Resep by Papa Nola</p>
-    </footer>
+                const ingredientsCheckedCount = computed(() => ingredients.value.filter(i => i.checked).length);
 
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
-    if ('IntersectionObserver' in window) {
-      let observer = new IntersectionObserver(function (entries, observer) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            let img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
-            observer.unobserve(img);
-          }
-        });
-      });
-      lazyImages.forEach(function (img) {
-        observer.observe(img);
-      });
-    } else {
-      // Fallback jika browser lama
-      lazyImages.forEach(function (img) {
-        img.src = img.dataset.src;
-        img.classList.remove('lazy');
-      });
-    }
-  });
-</script>
+                const nextStep = () => {
+                    if (activeStep.value < steps.value.length - 1) {
+                        activeStep.value++;
+                    } else {
+                        isCookingMode.value = false;
+                        Swal.fire({
+                            title: 'Selamat Bunda!',
+                            text: 'Pentol ayam lezat buatan Bunda sudah jadi. Jangan lupa foto dan tag Papa Nola ya!',
+                            icon: 'success',
+                            confirmButtonColor: '#16a34a',
+                            confirmButtonText: 'Mantap!'
+                        });
+                    }
+                };
+
+                const startCooking = () => {
+                    if (ingredientsCheckedCount.value < ingredients.value.length) {
+                        Swal.fire({
+                            title: 'Bahan Belum Lengkap?',
+                            text: "Sepertinya ada beberapa bahan yang belum dicentang. Tetap lanjut memasak?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#16a34a',
+                            cancelButtonColor: '#64748b',
+                            confirmButtonText: 'Ya, Lanjut!',
+                            cancelButtonText: 'Siapkan dulu'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                isCookingMode.value = true;
+                                activeStep.value = 0;
+                            }
+                        });
+                    } else {
+                        isCookingMode.value = true;
+                        activeStep.value = 0;
+                    }
+                };
+
+                const resetIngredients = () => {
+                    ingredients.value.forEach(i => i.checked = false);
+                };
+
+                const copyLink = () => {
+                    navigator.clipboard.writeText(window.location.href);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Link resep berhasil disalin!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                };
+
+                const resetView = () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+
+                return {
+                    ingredients,
+                    steps,
+                    activeStep,
+                    progressPercentage,
+                    ingredientsCheckedCount,
+                    isCookingMode,
+                    nextStep,
+                    startCooking,
+                    resetIngredients,
+                    copyLink,
+                    resetView
+                };
+            }
+        }).mount('#app');
+    </script>
 </body>
 </html>
-
